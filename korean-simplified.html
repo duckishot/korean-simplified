@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korean Simplified — Want to Learn Korean? Start Here.</title>
+<meta name="description" content="A beginner-friendly roadmap for learning Korean — what to learn first, why it matters, and where to find good resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   Korean Simplified — Design Tokens
+   Palette nods to the Taegeuk (Korean flag) blue/red duality, kept quiet:
+   white/ink carry the page, indigo is the only working accent, red is used
+   in exactly one place per page, never as decoration.
+   The mark (circle + line) borrows Hangul's own building blocks — Sejong
+   designed the alphabet from a circle (heaven), a flat line (earth), and a
+   standing line (person). That geometry is the signature element site-wide.
+   ========================================================================== */
+:root {
+  --bg: #ffffff; --bg-soft: #f6f5f2; --bg-soft-2: #efeee9;
+  --ink: #111111; --ink-soft: #55534d; --ink-faint: #8b8880;
+  --line: #e3e1da; --line-strong: #cfccc3;
+  --accent: #1d3557; --accent-soft: #eef1f6; --accent-red: #bc3a3a; --white: #ffffff;
+  --font-display: 'Sora', 'Pretendard', sans-serif;
+  --font-body: 'Inter', 'Pretendard', sans-serif;
+  --font-kr: 'Noto Sans KR', 'Inter', sans-serif;
+  --max-width: 1120px; --max-width-narrow: 760px;
+  --radius: 3px; --radius-lg: 6px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+svg { display: block; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; margin: 0 0 .5em; letter-spacing: -0.01em; }
+p { margin: 0 0 1em; color: var(--ink-soft); }
+.container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+.container-narrow { width: 100%; max-width: var(--max-width-narrow); margin: 0 auto; padding: 0 24px; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+
+.mark { display: inline-flex; width: 1em; height: 1em; position: relative; flex-shrink: 0; }
+.mark svg { width: 100%; height: 100%; display: block; }
+
+.site-nav { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92); backdrop-filter: saturate(180%) blur(10px); border-bottom: 1px solid var(--line); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--ink); cursor: pointer; }
+.brand .mark { font-size: 22px; color: var(--accent); }
+.brand-kr { font-family: var(--font-kr); font-weight: 500; font-size: 13px; color: var(--ink-faint); margin-left: 2px; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a { font-size: 14.5px; font-weight: 500; color: var(--ink-soft); padding: 8px 14px; border-radius: var(--radius); transition: color .15s ease, background .15s ease; cursor: pointer; }
+.nav-links a:hover { color: var(--ink); background: var(--bg-soft); }
+.nav-links a.active { color: var(--ink); font-weight: 600; }
+.nav-toggle { display: none; background: none; border: 1px solid var(--line-strong); border-radius: var(--radius); width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; }
+.nav-toggle span, .nav-toggle span::before, .nav-toggle span::after { content: ''; display: block; width: 18px; height: 2px; background: var(--ink); position: relative; transition: transform .2s ease, opacity .2s ease; }
+.nav-toggle span::before { position: absolute; top: -6px; }
+.nav-toggle span::after { position: absolute; top: 6px; }
+@media (max-width: 760px) {
+  .nav-toggle { display: flex; }
+  .nav-links { position: absolute; top: 68px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 8px 24px 18px; gap: 2px; display: none; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 8px; border-bottom: 1px solid var(--bg-soft); border-radius: 0; }
+}
+
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-weight: 600; font-size: 15px; padding: 13px 24px; border-radius: var(--radius); border: 1px solid transparent; cursor: pointer; transition: transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease; white-space: nowrap; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--ink); color: var(--white); }
+.btn-primary:hover { background: var(--accent); }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.btn-secondary:hover { border-color: var(--ink); background: var(--bg-soft); }
+.btn-small { padding: 8px 14px; font-size: 13.5px; }
+
+.hero { padding: 96px 0 72px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.hero-mark { position: absolute; right: -60px; top: -60px; width: 340px; height: 340px; opacity: 0.05; pointer-events: none; color: var(--ink); }
+.hero-mark svg { width: 100%; height: 100%; }
+.hero h1 { font-size: clamp(34px, 5.4vw, 58px); max-width: 15ch; }
+.hero .lede { font-size: 18px; max-width: 56ch; margin-top: 20px; margin-bottom: 34px; color: var(--ink-soft); }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.disclaimer-box { margin-top: 56px; padding: 20px 24px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius-lg); max-width: 68ch; display: flex; gap: 14px; }
+.disclaimer-box .mark { color: var(--accent-red); font-size: 18px; margin-top: 2px; }
+.disclaimer-box p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+.disclaimer-box strong { color: var(--ink); }
+
+.section { padding: 72px 0; }
+.section-tight { padding: 48px 0; }
+.section-soft { background: var(--bg-soft); }
+.section-head { max-width: 62ch; margin-bottom: 44px; }
+.section-head h2 { font-size: clamp(26px, 3.4vw, 36px); }
+.section-head p { font-size: 16.5px; }
+
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.feature { padding: 28px 0 0; border-top: 1px solid var(--line-strong); }
+.feature .mark { color: var(--accent); font-size: 20px; margin-bottom: 14px; }
+.feature h3 { font-size: 17px; margin-bottom: 8px; }
+.feature p { font-size: 14.5px; margin: 0; }
+@media (max-width: 820px) { .feature-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+.roadmap-path { position: relative; }
+.roadmap-path::before { content: ''; position: absolute; left: 27px; top: 8px; bottom: 8px; width: 1px; background: var(--line-strong); }
+@media (max-width: 640px) { .roadmap-path::before { left: 21px; } }
+.roadmap-item { position: relative; display: grid; grid-template-columns: 56px 1fr; gap: 24px; padding-bottom: 40px; }
+.roadmap-item:last-child { padding-bottom: 0; }
+.roadmap-node { position: relative; z-index: 1; width: 56px; height: 56px; border-radius: 50%; background: var(--bg); border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--ink-faint); }
+@media (max-width: 640px) { .roadmap-node { width: 44px; height: 44px; font-size: 14px; } .roadmap-item { grid-template-columns: 44px 1fr; gap: 16px; } }
+
+.topic-card { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px 30px; background: var(--bg); transition: border-color .15s ease, box-shadow .15s ease; }
+.topic-card:hover { border-color: var(--line-strong); box-shadow: 0 6px 24px rgba(17,17,17,0.05); }
+.topic-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+.topic-card h3 { font-size: 20px; margin: 0; }
+.topic-kr { font-family: var(--font-kr); font-size: 14px; color: var(--ink-faint); font-weight: 500; }
+.topic-card .overview { font-size: 15px; margin-bottom: 14px; }
+.topic-why { display: flex; gap: 10px; font-size: 14px; color: var(--ink-soft); padding: 12px 14px; background: var(--bg-soft); border-radius: var(--radius); margin-bottom: 16px; }
+.topic-why strong { color: var(--ink); font-weight: 600; }
+.topic-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.tip-pill { font-size: 12.5px; color: var(--ink-faint); }
+
+.intro-copy { max-width: 64ch; }
+.intro-copy p { font-size: 16.5px; }
+
+.topic-hero { padding: 56px 0 44px; border-bottom: 1px solid var(--line); }
+.topic-hero-top { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.topic-index { font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--accent); border: 1px solid var(--accent); border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
+.topic-hero h1 { font-size: clamp(30px, 4.6vw, 46px); display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.topic-hero .topic-kr { font-size: 0.5em; }
+.topic-hero .lede { font-size: 17px; max-width: 60ch; color: var(--ink-soft); }
+
+.topic-block { padding: 44px 0; border-top: 1px solid var(--line); }
+.topic-block:first-of-type { border-top: none; }
+.topic-block h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 18px; font-family: var(--font-body); font-weight: 700; }
+.topic-block .block-body { max-width: 70ch; }
+.topic-block .block-body p { font-size: 16px; }
+
+.learn-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.learn-list li { display: flex; gap: 12px; font-size: 15.5px; color: var(--ink-soft); align-items: flex-start; }
+.learn-list .mark { color: var(--accent); margin-top: 4px; font-size: 12px; }
+.learn-list strong { color: var(--ink); font-weight: 600; }
+
+.tip-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-width: 70ch; }
+.tip-list li { display: flex; gap: 12px; font-size: 15px; color: var(--ink-soft); padding: 14px 16px; background: var(--bg-soft); border-radius: var(--radius); }
+.tip-list .mark { color: var(--accent-red); font-size: 12px; margin-top: 3px; }
+
+.resource-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 720px) { .resource-grid { grid-template-columns: 1fr; } }
+.resource-card { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; }
+.resource-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.resource-card h4 { font-size: 16px; margin: 0; font-family: var(--font-display); }
+.resource-type { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); border: 1px solid var(--line-strong); border-radius: 20px; padding: 3px 9px; white-space: nowrap; }
+.resource-card p { font-size: 14px; margin: 0; }
+.resource-useful { font-size: 13px; color: var(--ink-soft); }
+.resource-useful strong { color: var(--ink); }
+.resource-link { margin-top: 4px; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--accent); }
+.resource-link:hover { text-decoration: underline; }
+.resource-source-note { font-size: 12.5px; color: var(--ink-faint); margin-top: 20px; }
+
+.coming-soon { border: 1px dashed var(--line-strong); border-radius: var(--radius-lg); padding: 40px 32px; text-align: center; color: var(--ink-soft); }
+.coming-soon .mark { color: var(--ink-faint); font-size: 26px; margin-bottom: 14px; }
+.coming-soon h3 { font-size: 18px; color: var(--ink); }
+.coming-soon p { max-width: 46ch; margin: 8px auto 0; font-size: 14.5px; }
+
+.topic-pagination { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; gap: 16px; padding: 40px 0 0; }
+.pagi-link { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 18px 20px; display: flex; flex-direction: column; gap: 4px; transition: border-color .15s ease, background .15s ease; }
+.pagi-link:hover { border-color: var(--line-strong); background: var(--bg-soft); }
+.pagi-link.next { text-align: right; align-items: flex-end; }
+.pagi-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); }
+.pagi-title { font-family: var(--font-display); font-weight: 700; font-size: 15.5px; }
+.pagi-mid { display: flex; align-items: center; }
+.pagi-mid a { font-size: 13.5px; font-weight: 600; color: var(--ink-soft); border: 1px solid var(--line-strong); border-radius: var(--radius); padding: 10px 14px; white-space: nowrap; }
+.pagi-mid a:hover { color: var(--ink); border-color: var(--ink); }
+.pagi-placeholder { visibility: hidden; }
+@media (max-width: 700px) {
+  .topic-pagination { grid-template-columns: 1fr; }
+  .pagi-link.next { text-align: left; align-items: flex-start; }
+  .pagi-mid { order: 3; }
+}
+
+.about-lede { font-size: 19px; color: var(--ink); font-family: var(--font-display); font-weight: 500; max-width: 40ch; line-height: 1.4; }
+.about-quote { border-left: 2px solid var(--accent); padding-left: 22px; margin: 36px 0; font-family: var(--font-display); font-size: 20px; font-weight: 500; color: var(--ink); max-width: 46ch; }
+.value-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 12px; }
+@media (max-width: 700px) { .value-grid { grid-template-columns: 1fr; } }
+.value-item { display: flex; gap: 14px; }
+.value-item .mark { color: var(--accent); font-size: 18px; margin-top: 3px; flex-shrink: 0; }
+.value-item h4 { font-size: 15.5px; margin-bottom: 4px; }
+.value-item p { font-size: 14.5px; margin: 0; }
+
+.site-footer { border-top: 1px solid var(--line); padding: 44px 0; margin-top: 40px; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-brand { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14.5px; color: var(--ink); }
+.footer-brand .mark { color: var(--accent); font-size: 16px; }
+.footer-note { font-size: 13px; color: var(--ink-faint); margin: 0; }
+.footer-links { display: flex; gap: 18px; }
+.footer-links a { font-size: 13.5px; color: var(--ink-soft); cursor: pointer; }
+.footer-links a:hover { color: var(--ink); }
+
+.text-center { text-align: center; }
+.mt-0 { margin-top: 0; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+@media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; gap: 28px; } }
+</style>
+</head>
+<body>
+
+<div id="nav-root"></div>
+<div id="app"></div>
+<div id="footer-root"></div>
+
+<script>
+/* ==========================================================================
+   Content data — add a new topic by adding an object here. Every page
+   renders straight from this array, so no markup needs to change to grow
+   the roadmap. Set fullPage:true and fill in `detail` once a deep-dive is
+   written; leaving it false shows an honest "coming soon" card instead.
+   ========================================================================== */
+const TOPICS = [
+  {
+    id: 'hangul', order: 1, title: 'Hangul', kr: '한글',
+    overview: 'The Korean writing system — 24 letters that combine into syllable blocks.',
+    why: 'Everything else on this roadmap assumes you can read. Hangul takes most learners a weekend, not a semester, so it is worth finishing before anything else.',
+    tip: 'Learn the shapes by writing them, not just recognizing them.',
+    fullPage: true,
+    detail: {
+      whatIsIt: "Hangul is the alphabet Korean is written in. It has 19 consonant letters and 21 vowel letters (many of them combinations), and instead of writing letters in a straight line like English, Korean groups them into syllable blocks — a bit like how English letters group into words, except the grouping happens inside every single syllable.",
+      history: "Hangul was created in 1443 under King Sejong the Great and published in 1446, in a document called the Hunminjeongeum (\"The Correct Sounds for the Instruction of the People\"). Before this, Korean was written using Chinese characters (hanja), which were difficult to learn and mostly accessible only to the educated elite. Sejong wanted an alphabet ordinary people could learn quickly. The consonant shapes are famously based on the shape your mouth and tongue make when you pronounce them, and the vowels are built from three philosophical symbols: a dot for heaven, a flat line for earth, and a vertical line for a standing person. It's still celebrated as a public holiday in Korea — Hangul Day, October 9th.",
+      howItWorks: "Each syllable block is built from at least one consonant and one vowel, stacked either side-by-side or top-to-bottom depending on the vowel's shape. A block can have up to four letters if it ends in a consonant sound (see Batchim, topic 3). Once you know the individual letter shapes and the block-building pattern, you can technically read any word in Korean out loud — even ones you don't understand yet, the same way a child can sound out English before knowing what every word means.",
+      whatToLearn: [
+        { label: 'The 14 basic consonants', text: 'ㄱ ㄴ ㄷ ㄹ ㅁ ㅂ ㅅ ㅇ ㅈ ㅊ ㅋ ㅌ ㅍ ㅎ and the sounds they represent.' },
+        { label: 'The 10 basic vowels', text: 'ㅏ ㅑ ㅓ ㅕ ㅗ ㅛ ㅜ ㅠ ㅡ ㅣ, plus how they combine with consonants.' },
+        { label: 'Double consonants (된소리)', text: 'ㄲ ㄸ ㅃ ㅆ ㅉ — tenser, sharper versions of five basic consonants.' },
+        { label: 'Combined vowels', text: 'ㅐ ㅔ ㅚ ㅘ ㅝ and others formed by combining basic vowels.' },
+        { label: 'Block construction', text: 'How consonant + vowel (+ consonant) stack into a single syllable block.' },
+      ],
+      beginnerTips: [
+        'Write each letter by hand a few times — muscle memory sticks faster than staring at a chart.',
+        "Don't romanize. Reading \"annyeonghaseyo\" instead of 안녕하세요 slows you down later — start sounding out the blocks from day one.",
+        'Learn consonants and vowels in small batches (4–5 at a time) rather than all 24 in one sitting.',
+        'Practice with real words immediately instead of isolated letters — it makes the shapes meaningful.',
+      ],
+      resources: [
+        { name: 'Korean From Zero! — Hangul chapter', type: 'Free guide', description: 'A structured, step-by-step introduction to reading and writing Hangul, part of a widely used free beginner course.', usefulFor: 'A guided first pass through every letter and combination, in order.', url: 'https://www.koreanfromzero.com/' },
+        { name: 'Duolingo — Korean', type: 'App', description: 'Gamified daily practice that starts with letter and sound recognition before moving into words.', usefulFor: 'Low-pressure daily repetition to lock in letter shapes.', url: 'https://www.duolingo.com/course/ko/en/Learn-Korean' },
+        { name: 'Dongsa.net / Naver Hangul Practice Sheets', type: 'Worksheet', description: 'Printable stroke-order practice sheets for handwriting each Hangul letter correctly.', usefulFor: 'Physically practicing correct stroke order, which also helps recognition.', url: 'https://www.naver.com/' },
+        { name: 'Talk To Me In Korean — Hangul lessons', type: 'Video / audio', description: 'A well-known Korean learning brand with a dedicated Hangul series that pairs each letter with its sound.', usefulFor: 'Hearing each letter pronounced by native speakers as you learn to read it.', url: 'https://talktomeinkorean.com/' },
+      ]
+    }
+  },
+  {
+    id: 'pronunciation', order: 2, title: 'Pronunciation', kr: '발음',
+    overview: 'How Korean actually sounds — vowel length, tense consonants, and sound changes between syllables.',
+    why: "Hangul tells you which letters are there. Pronunciation tells you how they actually sound once real speech runs them together — the two are not the same skill.",
+    tip: 'Shadow native speakers early, even before you understand every word.',
+    fullPage: true,
+    detail: {
+      whatIsIt: "Pronunciation covers the sounds Hangul represents in real speech: the difference between similar-looking consonants (ㄱ vs ㅋ vs ㄲ), vowel sounds that don't exist in English, and — importantly — the way sounds shift when syllables are said together, which is not obvious just from reading the letters.",
+      history: "Because Hangul was designed to map closely to actual mouth shapes and sounds (see Hangul, topic 1), Korean is unusually phonetic compared to a language like English. That's an advantage for beginners: once you learn the sound rules, spelling rarely lies to you the way it does in English.",
+      howItWorks: "Individual letters are fairly consistent, but Korean has systematic sound-change rules that happen automatically when letters meet at syllable boundaries — consonants softening, nasalizing, or linking to the next syllable. These aren't exceptions to memorize one by one; they're patterns that, once learned, apply predictably across the whole language.",
+      whatToLearn: [
+        { label: 'Tense vs. aspirated vs. plain consonants', text: "The three-way distinction (e.g. ㄱ / ㅋ / ㄲ) that doesn't exist in English." },
+        { label: 'Vowel length and clarity', text: 'Distinguishing similar vowel sounds like ㅓ and ㅗ, or ㅐ and ㅔ.' },
+        { label: 'Linking sounds (연음)', text: 'How a final consonant "moves" to the start of the next syllable when followed by a vowel.' },
+        { label: 'Basic sound changes', text: 'Common patterns like nasalization and consonant assimilation between syllables.' },
+      ],
+      beginnerTips: [
+        'Shadow (repeat out loud immediately after) short native audio clips — your ear adjusts faster than your eyes.',
+        "Record yourself occasionally and compare it to a native speaker's clip. It's uncomfortable, but effective.",
+        "Don't chase perfect pronunciation before moving on — aim for clearly understandable, and refine it over time.",
+        'Pay special attention to tense consonants (ㄲ, ㄸ, ㅃ, ㅆ, ㅉ) — they change word meaning, not just accent.',
+      ],
+      resources: [
+        { name: 'HowToStudyKorean — Unit 0', type: 'Free guide', description: 'A widely recommended, detailed written breakdown of Korean pronunciation rules before grammar begins.', usefulFor: 'Understanding the "why" behind sound changes, not just memorizing examples.', url: 'https://www.howtostudykorean.com/unit0/' },
+        { name: 'Talk To Me In Korean — Pronunciation series', type: 'Video / audio', description: 'Short, focused lessons on individual sound distinctions with native audio.', usefulFor: 'Training your ear on specific tricky sound pairs.', url: 'https://talktomeinkorean.com/' },
+        { name: 'Forvo', type: 'Audio dictionary', description: 'A crowd-sourced pronunciation dictionary with native speaker audio for individual words.', usefulFor: 'Checking how a specific word is actually pronounced by real speakers.', url: 'https://forvo.com/languages/ko/' },
+      ]
+    }
+  },
+  {
+    id: 'batchim', order: 3, title: 'Batchim', kr: '받침',
+    overview: 'The "support" consonant that sits underneath a syllable block and closes it off.',
+    why: 'Batchim changes how a syllable is pronounced and can carry grammatical meaning — skipping it makes words hard to read correctly.',
+    tip: 'Learn the 7 representative batchim sounds before worrying about every possible letter combination.',
+    fullPage: false,
+  },
+  {
+    id: 'sentence-structure', order: 4, title: 'Basic Sentence Structure', kr: '문장 구조',
+    overview: 'Korean word order — subject, object, verb — and why it feels backwards at first if you speak English.',
+    why: "Every sentence you build from here on depends on this order. Getting comfortable with it early prevents you from mentally translating word-for-word forever.",
+    tip: 'Practice reordering simple English sentences into subject–object–verb before writing them in Korean.',
+    fullPage: false,
+  },
+  {
+    id: 'vocabulary', order: 5, title: 'Essential Vocabulary', kr: '기초 어휘',
+    overview: 'A core set of high-frequency words that show up constantly in daily conversation.',
+    why: "Grammar without vocabulary is a skeleton with nothing on it. A focused core vocabulary lets you make real sentences much sooner.",
+    tip: 'Learn words in short phrases, not isolated flashcards — context helps them stick.',
+    fullPage: false,
+  },
+  {
+    id: 'particles', order: 6, title: 'Particles', kr: '조사',
+    overview: "Small markers attached to words that show their role in a sentence — subject, object, topic, location, and more.",
+    why: "Korean doesn't rely on word order alone to show meaning the way English does. Particles do that job, so misusing or dropping them can genuinely change what a sentence means.",
+    tip: 'Start with 은/는, 이/가, and 을/를 — most beginner sentences lean on these three pairs.',
+    fullPage: true,
+    detail: {
+      whatIsIt: "Particles are short syllables attached directly to the end of a noun that mark its grammatical role in the sentence — whether it's the topic being discussed, the subject doing the action, the object receiving it, or the location something happens at. English mostly uses word order and prepositions for this job; Korean mostly uses particles.",
+      history: "Particles have been part of the Korean grammatical system for as long as the language has been recorded, predating Hangul itself — earlier writing systems that used Chinese characters to represent Korean (like idu and hyangchal) already had ways to mark these same grammatical roles. Their function hasn't changed much; only the writing system representing them has.",
+      howItWorks: "Most particles come in pairs, and which one you use depends on whether the word they attach to ends in a vowel or a consonant (batchim). For example, 이/가 marks a subject: 이 attaches after a consonant-ending word, 가 after a vowel-ending one. Once you know a particle's job and its two forms, you can attach it to essentially any noun.",
+      whatToLearn: [
+        { label: '은/는 (topic particle)', text: 'Introduces what the sentence is about, often the topic already known to the listener.' },
+        { label: '이/가 (subject particle)', text: 'Marks the grammatical subject — the thing doing the action or in the described state.' },
+        { label: '을/를 (object particle)', text: 'Marks the direct object — the thing receiving the action.' },
+        { label: '에 / 에서 (location particles)', text: '에 for a static location or destination, 에서 for where an action takes place.' },
+        { label: '도, 만, 와/과', text: 'Common additional particles meaning "also," "only," and "and/with."' },
+      ],
+      beginnerTips: [
+        "Don't translate 은/는 and 이/가 both as \"is\" in your head — they carry a real difference in emphasis that's worth learning properly.",
+        'Notice particles in real sentences from shows or textbooks rather than only memorizing rules in isolation.',
+        "It's normal to drop or mix up particles as a beginner — native speakers will still understand you.",
+        'Make flashcards with full example sentences, not the particle alone.',
+      ],
+      resources: [
+        { name: 'HowToStudyKorean — Unit 1', type: 'Free guide', description: 'A thorough, example-heavy breakdown of the core particles in the order beginners typically need them.', usefulFor: 'A complete first pass through 은/는, 이/가, 을/를 and more, with practice sentences.', url: 'https://www.howtostudykorean.com/unit1/' },
+        { name: 'Talk To Me In Korean — Level 1 particle lessons', type: 'Video / audio', description: 'Short lessons that isolate a single particle at a time with spoken examples.', usefulFor: 'Hearing particles used naturally in short, simple conversations.', url: 'https://talktomeinkorean.com/' },
+      ]
+    }
+  },
+  {
+    id: 'verb-conjugation', order: 7, title: 'Verb Conjugation', kr: '동사 활용',
+    overview: 'How Korean verbs change form to show tense, politeness, and connection to other clauses.',
+    why: "Korean verbs sit at the end of the sentence and carry a lot of grammatical weight — tense, formality, and mood are all built into the verb form itself.",
+    tip: 'Learn the dictionary form first — every conjugation pattern builds from it.',
+    fullPage: false,
+  },
+  {
+    id: 'politeness-honorifics', order: 8, title: 'Politeness Levels & Honorifics', kr: '높임말',
+    overview: 'How Korean changes vocabulary and grammar depending on who you are speaking to and about.',
+    why: "Speaking to a close friend and speaking to your manager use genuinely different grammar in Korean, not just a different tone. Getting the register wrong can come across as rude even with correct grammar.",
+    tip: 'Start with polite formal speech (해요체) — it is safe in almost any beginner situation.',
+    fullPage: false,
+  },
+  {
+    id: 'listening', order: 9, title: 'Listening', kr: '듣기',
+    overview: 'Training your ear to follow natural-speed, natural Korean rather than slowed-down textbook audio.',
+    why: "Reading and listening are different skills. Many learners can read a sentence fine but go blank hearing the same sentence spoken quickly.",
+    tip: 'Re-listen to short clips many times before reaching for subtitles.',
+    fullPage: false,
+  },
+  {
+    id: 'reading', order: 10, title: 'Reading', kr: '읽기',
+    overview: 'Moving from sounding out individual words to comfortably reading full sentences and short passages.',
+    why: "Reading reinforces vocabulary and grammar patterns at your own pace, and gives you a lower-pressure way to practice than live conversation.",
+    tip: 'Pick material slightly below your level at first — being able to read confidently matters more than difficulty.',
+    fullPage: false,
+  },
+  {
+    id: 'speaking', order: 11, title: 'Speaking', kr: '말하기',
+    overview: 'Producing spoken Korean yourself, from single words to full conversations.',
+    why: "Speaking is where all the other skills get tested at once, in real time — it's also usually the skill beginners avoid the longest, which slows everyone down.",
+    tip: 'Speak out loud from your very first lesson, even alone in your room — it builds the habit early.',
+    fullPage: false,
+  },
+  {
+    id: 'immersion', order: 12, title: 'Immersion', kr: '몰입',
+    overview: 'Surrounding yourself with real, unfiltered Korean — shows, music, apps, and conversation — instead of only studying.',
+    why: "Immersion is what turns studied knowledge into instinct. It's also, for most learners, the most enjoyable part of the whole process.",
+    tip: "Start immersing early and imperfectly — you don't need to \"finish\" the roadmap first.",
+    fullPage: false,
+  },
+];
+
+const getTopicById = (id) => TOPICS.find(t => t.id === id);
+const sortedTopics = () => [...TOPICS].sort((a, b) => a.order - b.order);
+
+/* ==========================================================================
+   Shared markup helpers
+   ========================================================================== */
+const markSVG = (color) => `
+  <span class="mark" aria-hidden="true"${color ? ` style="color:${color}"` : ''}>
+    <svg viewBox="0 0 24 24" fill="none">
+      <circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.6"/>
+      <line x1="8" y1="16.5" x2="8" y2="22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="13.5" y1="19.2" x2="21.5" y2="19.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  </span>`;
+
+const arrowSVG = () => `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display:inline;vertical-align:-2px;"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const externalSVG = () => `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="display:inline;vertical-align:-1px;"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+function topicCardHTML(topic) {
+  return `
+    <div class="roadmap-item" id="${topic.id}">
+      <div class="roadmap-node">${String(topic.order).padStart(2, '0')}</div>
+      <div class="topic-card">
+        <div class="topic-card-head">
+          <h3>${topic.title}</h3>
+          <span class="topic-kr">${topic.kr || ''}</span>
+        </div>
+        <p class="overview">${topic.overview}</p>
+        <div class="topic-why"><strong>Why it matters —</strong>&nbsp;${topic.why}</div>
+        <div class="topic-card-foot">
+          <span class="tip-pill">Tip: ${topic.tip}</span>
+          <a class="btn btn-secondary btn-small" href="#/topic/${topic.id}">Learn more ${arrowSVG()}</a>
+        </div>
+      </div>
+    </div>`;
+}
+
+function resourceCardHTML(r) {
+  return `
+    <div class="resource-card">
+      <div class="resource-card-head">
+        <h4>${r.name}</h4>
+        <span class="resource-type">${r.type}</span>
+      </div>
+      <p>${r.description}</p>
+      <p class="resource-useful"><strong>Useful for:</strong> ${r.usefulFor}</p>
+      <a class="resource-link" href="${r.url}" target="_blank" rel="noopener noreferrer">Visit resource ${externalSVG()}</a>
+    </div>`;
+}
+
+/* ==========================================================================
+   Nav + footer
+   ========================================================================== */
+const NAV_ITEMS = [
+  { route: '#/', label: 'Home', key: 'home' },
+  { route: '#/roadmap', label: 'Start Here', key: 'start' },
+  { route: '#/roadmap', label: 'Roadmap', key: 'roadmap' },
+  { route: '#/resources', label: 'Resources', key: 'resources' },
+  { route: '#/about', label: 'About', key: 'about' },
+];
+
+function renderNav(activeKey) {
+  const root = document.getElementById('nav-root');
+  const links = NAV_ITEMS.map(item => `<a href="${item.route}" class="${item.key === activeKey ? 'active' : ''}">${item.label}</a>`).join('');
+  root.innerHTML = `
+    <nav class="site-nav">
+      <div class="container nav-inner">
+        <a href="#/" class="brand">${markSVG()}Korean Simplified <span class="brand-kr">한국어 간단히</span></a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+        <div class="nav-links" id="nav-links">${links}</div>
+      </div>
+    </nav>`;
+  const toggle = document.getElementById('nav-toggle');
+  const linksEl = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => {
+    const isOpen = linksEl.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+  linksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => linksEl.classList.remove('open')));
+}
+
+function renderFooter() {
+  const root = document.getElementById('footer-root');
+  root.innerHTML = `
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <div class="footer-brand">${markSVG()}Korean Simplified</div>
+          <p class="footer-note">A learner-made roadmap — not a substitute for a teacher or course.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#/roadmap">Roadmap</a>
+          <a href="#/resources">Resources</a>
+          <a href="#/about">About</a>
+        </div>
+      </div>
+    </footer>`;
+}
+
+/* ==========================================================================
+   Page renderers
+   ========================================================================== */
+function pageHome() {
+  return `
+  <header class="hero">
+    <div class="hero-mark">${markSVG()}</div>
+    <div class="container">
+      <span class="eyebrow">A learner-made roadmap</span>
+      <h1>Want to Learn Korean?<br>Start Here.</h1>
+      <p class="lede">
+        Korean has more free resources than any beginner could ever get through — apps, YouTube channels,
+        textbooks, subreddits, flashcard decks. That's not the problem. The problem is knowing what to open
+        first. Korean Simplified is a structured roadmap: what to learn, in what order, why it matters, and
+        which existing resources are actually worth your time at each step.
+      </p>
+      <div class="hero-actions">
+        <a href="#/roadmap" class="btn btn-primary">Start Learning →</a>
+        <a href="#/about" class="btn btn-secondary">Why this site exists</a>
+      </div>
+      <div class="disclaimer-box">
+        ${markSVG('var(--accent-red)')}
+        <p><strong>This site doesn't replace a teacher or a course.</strong> It's a guide to help you understand
+        what to learn, when to learn it, and where to find good resources — not a course itself. Pair it with a
+        real class, tutor, or structured program whenever you can.</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How it helps</span>
+        <h2>Three things beginners usually ask for</h2>
+        <p>Korean Simplified is built around the questions that come up in almost every beginner forum post.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature">${markSVG()}<h3>"Where do I even start?"</h3><p>A clear, numbered order for the 12 core topics — from Hangul to immersion — so you're never guessing what to open next.</p></div>
+        <div class="feature">${markSVG()}<h3>"Which resource should I use?"</h3><p>Every topic links to a short, curated set of resources — with a plain explanation of what each one is actually good for.</p></div>
+        <div class="feature">${markSVG()}<h3>"Why does this even matter?"</h3><p>Each topic explains why it's on the roadmap at all — including cultural or historical context where it actually helps understanding.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <span class="eyebrow">Made by a learner, not a teacher</span>
+          <h2>I'm learning Korean too</h2>
+          <p class="intro-copy">Korean Simplified was built by a Korean learner — not a native speaker, not a certified teacher.
+          I remember exactly what it felt like to open a beginner guide, see ten conflicting opinions about
+          where to start, and close the tab without learning anything. This is the roadmap I wish I'd had:
+          not a replacement for real instruction, just a clearer map of the terrain.</p>
+          <a href="#/about" class="btn btn-secondary">Read the full story →</a>
+        </div>
+        <div>
+          <span class="eyebrow">Ready when you are</span>
+          <h2>Your first step</h2>
+          <p class="intro-copy">The roadmap starts with Hangul — the Korean alphabet — because almost everything after it depends
+          on being able to read. Most learners finish the basics of Hangul in a weekend.</p>
+          <a href="#/topic/hangul" class="btn btn-primary">Start with Hangul →</a>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function pageRoadmap() {
+  return `
+  <header class="topic-hero">
+    <div class="container">
+      <span class="eyebrow">The roadmap</span>
+      <h1>Your Korean Learning Roadmap</h1>
+      <p class="lede">
+        Korean is best learned step by step. You don't need to master one topic before glancing at the next,
+        and you definitely don't need to learn everything at once — but this order is a reasonable, tested path
+        through the basics, and each step explains why it comes where it does. Twelve topics for now; more will
+        be added as this roadmap grows.
+      </p>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container">
+      <div class="roadmap-path">${sortedTopics().map(topicCardHTML).join('')}</div>
+    </div>
+  </section>`;
+}
+
+function pageTopic(id) {
+  const topic = getTopicById(id);
+  if (!topic) {
+    return `<div class="container section text-center"><h1>Topic not found</h1><p>That topic doesn't exist yet. Head back to the roadmap to see everything that's available.</p><a class="btn btn-primary" href="#/roadmap">Back to roadmap</a></div>`;
+  }
+  const all = sortedTopics();
+  const idx = all.findIndex(t => t.id === topic.id);
+  const prev = idx > 0 ? all[idx - 1] : null;
+  const next = idx < all.length - 1 ? all[idx + 1] : null;
+
+  const heroHTML = `
+    <header class="topic-hero">
+      <div class="container">
+        <div class="topic-hero-top">
+          <span class="topic-index">${String(topic.order).padStart(2, '0')}</span>
+          <span class="eyebrow" style="margin-bottom:0;">Roadmap step ${topic.order} of ${all.length}</span>
+        </div>
+        <h1>${topic.title} <span class="topic-kr">${topic.kr || ''}</span></h1>
+        <p class="lede">${topic.overview}</p>
+      </div>
+    </header>`;
+
+  const paginationHTML = `
+    <div class="container">
+      <div class="topic-pagination">
+        ${prev ? `<a class="pagi-link prev" href="#/topic/${prev.id}"><span class="pagi-label">← Previous topic</span><span class="pagi-title">${prev.title}</span></a>` : `<div class="pagi-placeholder"></div>`}
+        <div class="pagi-mid"><a href="#/roadmap">Back to roadmap</a></div>
+        ${next ? `<a class="pagi-link next" href="#/topic/${next.id}"><span class="pagi-label">Next topic →</span><span class="pagi-title">${next.title}</span></a>` : `<div class="pagi-placeholder"></div>`}
+      </div>
+    </div>`;
+
+  if (!topic.fullPage) {
+    return `
+      ${heroHTML}
+      <section class="section">
+        <div class="container">
+          <div class="topic-why" style="margin-bottom:32px; max-width:70ch;"><strong>Why it matters —</strong>&nbsp;${topic.why}</div>
+          <div class="coming-soon">
+            ${markSVG()}
+            <h3>The full deep-dive is still being written</h3>
+            <p>This topic is on the roadmap and the short overview above is accurate — the detailed
+            breakdown, history, and curated resource list for ${topic.title} are coming as the site grows.
+            <br><br>Tip for now: <em>${topic.tip}</em></p>
+          </div>
+        </div>
+      </section>
+      <section class="section-tight">${paginationHTML}</section>`;
+  }
+
+  const d = topic.detail;
+  const whatToLearnHTML = d.whatToLearn.map(item => `<li>${markSVG()}<span><strong>${item.label}.</strong> ${item.text}</span></li>`).join('');
+  const tipsHTML = d.beginnerTips.map(tip => `<li>${markSVG()}<span>${tip}</span></li>`).join('');
+  const resourcesHTML = d.resources.map(resourceCardHTML).join('');
+
+  return `
+    ${heroHTML}
+    <section class="topic-block"><div class="container"><h2>What is ${topic.title}</h2><div class="block-body"><p>${d.whatIsIt}</p></div></div></section>
+    <section class="topic-block section-soft"><div class="container"><h2>Brief History</h2><div class="block-body"><p>${d.history}</p></div></div></section>
+    <section class="topic-block"><div class="container"><h2>How ${topic.title} Works</h2><div class="block-body"><p>${d.howItWorks}</p></div></div></section>
+    <section class="topic-block section-soft"><div class="container"><h2>What You Should Learn</h2><ul class="learn-list" style="max-width:70ch;">${whatToLearnHTML}</ul></div></section>
+    <section class="topic-block"><div class="container"><h2>Beginner Tips</h2><ul class="tip-list">${tipsHTML}</ul></div></section>
+    <section class="topic-block section-soft">
+      <div class="container">
+        <h2>Resources</h2>
+        <div class="resource-grid">${resourcesHTML}</div>
+        <p class="resource-source-note">All resources above belong to their original creators. Korean Simplified doesn't copy or
+        reproduce their content — only summarizes what each one is useful for and links you to the source.</p>
+      </div>
+    </section>
+    <section class="section-tight">${paginationHTML}</section>`;
+}
+
+function pageResources() {
+  const withResources = sortedTopics().filter(t => t.fullPage && t.detail && t.detail.resources && t.detail.resources.length);
+  const without = sortedTopics().filter(t => !(t.fullPage && t.detail && t.detail.resources && t.detail.resources.length));
+
+  const groupsHTML = withResources.map(topic => `
+    <div class="container topic-block" style="border-top:1px solid var(--line); padding-top:44px;">
+      <div class="section-head" style="margin-bottom:24px;">
+        <span class="eyebrow">Step ${String(topic.order).padStart(2, '0')}</span>
+        <h2 style="font-size:24px; text-transform:none; letter-spacing:normal; color:var(--ink); font-family:var(--font-display);">
+          ${topic.title} <a href="#/topic/${topic.id}" class="btn btn-small btn-secondary" style="margin-left:12px; vertical-align:middle;">View topic ${arrowSVG()}</a>
+        </h2>
+      </div>
+      <div class="resource-grid">${topic.detail.resources.map(resourceCardHTML).join('')}</div>
+    </div>`).join('');
+
+  const comingSoonNote = without.length ? `
+    <div class="container topic-block" style="border-top:1px solid var(--line); padding-top:44px;">
+      <div class="coming-soon">
+        ${markSVG()}
+        <h3>More resource lists on the way</h3>
+        <p>${without.map(t => t.title).join(', ')} don't have a curated resource list yet — their roadmap
+        entries are live, and detailed resources will be added as those pages are written.</p>
+      </div>
+    </div>` : '';
+
+  return `
+    <header class="topic-hero">
+      <div class="container">
+        <span class="eyebrow">Curated, not exhaustive</span>
+        <h1>Resources</h1>
+        <p class="lede">Every resource below is one that shows up on a topic's deep-dive page. This is a shortcut for
+        browsing them all in one place — for the "why" behind each pick and where it fits in the roadmap,
+        visit the topic page itself.</p>
+      </div>
+    </header>
+    <section class="section">
+      ${groupsHTML}
+      ${comingSoonNote}
+      <div class="container">
+        <p class="resource-source-note">All resources listed belong to their original creators. Korean Simplified doesn't copy or
+        reproduce their content — only summarizes what each one is useful for and links you to the source.</p>
+      </div>
+    </section>`;
+}
+
+function pageAbout() {
+  return `
+  <header class="topic-hero">
+    <div class="container">
+      <span class="eyebrow">About the project</span>
+      <h1>Learning in public, one step ahead of you</h1>
+      <p class="lede">The honest version of who made this and why.</p>
+    </div>
+  </header>
+  <section class="section">
+    <div class="container-narrow">
+      <p class="about-lede">I'm not a Korean teacher. I'm not a native speaker. I'm a learner — currently
+      still working through the same roadmap this site is built around.</p>
+      <p>When I started learning Korean, the hardest part wasn't any single grammar point or the alphabet.
+      It was the very first step: opening a search engine, typing "how to learn Korean," and getting buried
+      under hundreds of conflicting opinions, abandoned blog posts, and resources with no explanation of who
+      they were actually for. I'd pick something, get a few lessons in, hear that it was "actually not that
+      good," switch to something else, and lose momentum. I know I wasn't the only one — I've since talked to
+      plenty of other beginners who described the exact same loop.</p>
+      <blockquote class="about-quote">"Where do I even start?" turned out to be the single most common question I heard from other beginners
+      — so that's the question this site is built to answer first.</blockquote>
+      <p>Korean Simplified is my attempt to hand a newer learner the map I wish I'd had — not a finished,
+      authoritative textbook, but an honest, ordered starting point built by someone who has felt exactly
+      as lost as they probably feel right now.</p>
+
+      <h2 style="margin-top:56px;">What this site is trying to do</h2>
+      <div class="value-grid">
+        <div class="value-item">${markSVG()}<div><h4>Learning alongside you</h4><p>This isn't written from above — it's written from a few steps ahead, by someone still making mistakes in the same language.</p></div></div>
+        <div class="value-item">${markSVG()}<div><h4>Sharing what actually helped</h4><p>Every resource listed here is one that made sense to an actual beginner, not just one that ranks well in a search engine.</p></div></div>
+        <div class="value-item">${markSVG()}<div><h4>Cutting out the early confusion</h4><p>The goal is to spare newer learners the specific dead ends and false starts this project's creator ran into first.</p></div></div>
+        <div class="value-item">${markSVG()}<div><h4>Pointing toward real teachers</h4><p>Nothing here is meant to replace an actual instructor, tutor, or established course — this site exists to connect you to them faster.</p></div></div>
+      </div>
+
+      <h2 style="margin-top:56px;">What this site is not</h2>
+      <p>This is not a substitute for professional instruction, and I'm not presenting myself as an authority
+      on the Korean language. I won't pretend to a fluency I don't have, and I won't claim credentials I
+      don't hold. If something on this site turns out to be wrong or outdated as my own Korean improves,
+      the plan is to go back and fix it — this roadmap is meant to keep growing and improving alongside my
+      own learning, not stay frozen as a one-time project.</p>
+
+      <div class="disclaimer-box" style="margin-top:40px;">
+        ${markSVG('var(--accent-red)')}
+        <p><strong>In short:</strong> use this site as a map, not a teacher. It'll tell you where to go — but
+        you'll still want a real guide for the parts that need one.</p>
+      </div>
+
+      <div class="text-center" style="margin-top:56px;">
+        <a href="#/roadmap" class="btn btn-primary">See the roadmap →</a>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ==========================================================================
+   Router
+   ========================================================================== */
+function activeNavKey(hash) {
+  if (hash.startsWith('#/roadmap') || hash.startsWith('#/topic')) return 'roadmap';
+  if (hash.startsWith('#/resources')) return 'resources';
+  if (hash.startsWith('#/about')) return 'about';
+  return 'home';
+}
+
+function render() {
+  const hash = window.location.hash || '#/';
+  const app = document.getElementById('app');
+  let html = '';
+
+  if (hash === '#/' || hash === '') {
+    document.title = 'Korean Simplified — Want to Learn Korean? Start Here.';
+    html = pageHome();
+  } else if (hash.startsWith('#/roadmap')) {
+    document.title = 'Your Korean Learning Roadmap — Korean Simplified';
+    html = pageRoadmap();
+  } else if (hash.startsWith('#/topic/')) {
+    const id = hash.replace('#/topic/', '');
+    const t = getTopicById(id);
+    document.title = t ? `${t.title} — Korean Simplified` : 'Topic not found — Korean Simplified';
+    html = pageTopic(id);
+  } else if (hash.startsWith('#/resources')) {
+    document.title = 'Resources — Korean Simplified';
+    html = pageResources();
+  } else if (hash.startsWith('#/about')) {
+    document.title = 'About — Korean Simplified';
+    html = pageAbout();
+  } else {
+    html = pageHome();
+  }
+
+  app.innerHTML = html;
+  renderNav(activeNavKey(hash));
+  renderFooter();
+  window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+}
+
+window.addEventListener('hashchange', render);
+window.addEventListener('DOMContentLoaded', render);
+render();
+</script>
+</body>
+</html>
