@@ -758,7 +758,7 @@ function render() {
     document.title = 'Korean Simplified';
     html = pageHome();
   } else if (hash.startsWith('#/roadmap')) {
-    document.title = 'Your Korean Learning Roadmap — Korean Simplified';
+    document.title = 'Korean Roadmap';
     html = pageRoadmap();
   } else if (hash.startsWith('#/topic/')) {
     const id = hash.replace('#/topic/', '');
@@ -766,10 +766,10 @@ function render() {
     document.title = t ? `${t.title} — Korean Simplified` : 'Topic not found — Korean Simplified';
     html = pageTopic(id);
   } else if (hash.startsWith('#/resources')) {
-    document.title = 'Resources — Korean Simplified';
+    document.title = 'Resources';
     html = pageResources();
   } else if (hash.startsWith('#/about')) {
-    document.title = 'About — Korean Simplified';
+    document.title = 'About';
     html = pageAbout();
   } else {
     html = pageHome();
